@@ -1,0 +1,30 @@
+<div class="container">
+
+  <div class="control clearfix mt-3 mb-3">
+
+      <div class="float-left">
+        <label class="mr-2"><b>Max Hits: </b></label>
+        <input type="text" [(ngModel)]="game.maxHits" (change)="changedmaxHits()" class="d-inline hits-input text-center form-control">
+      </div>
+
+      <div class="text-right float-right">
+        <button class="btn btn-primary btn-sm mr-1" (click)="reset()">
+          <i class="fa fa-refresh" aria-hidden="true"></i>
+        </button>
+        <button class="btn btn-primary btn-sm ml-1 mr-1" (click)="previousPlayer()">
+          <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </button>
+        <button class="btn btn-primary btn-sm ml-1">
+          <i class="fa fa-arrow-right" aria-hidden="true" (click)="nextPlayer()"></i>
+        </button>
+      </div>
+  </div>
+
+  <div class="row pl-3 pr-3">
+      <div class="col p-0 text-center" *ngFor="let player of players">
+        <app-player-name playMode="true" (delete)="onDelete(player)" [player]="player"></app-player-name>
+        <app-target [player]="player"></app-target>
+        <app-hits-counter (chagedScore)="changedScore()" [player]="player"></app-hits-counter>
+      </div>
+  </div>
+</div>

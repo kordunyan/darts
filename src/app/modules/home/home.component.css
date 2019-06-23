@@ -1,0 +1,22 @@
+.container {
+    margin-top: 150px;
+}
+
+.game-link {
+    
+    display: block;
+    border-radius: .25rem;
+    text-align: center;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+    box-shadow: 0 2px 2px rgba(10,16,20,.24), 0 0 2px rgba(10,16,20,.12);
+    color: #212529;
+    transition: box-shadow .5s;
+}
+
+.game-link:hover {
+    text-decoration: none;
+    box-shadow: 0 8px 8px rgba(10,16,20,.24), 0 0 8px rgba(10,16,20,.12);
+}

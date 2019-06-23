@@ -1,0 +1,5 @@
+<div class="player-target p-2">
+    <input *ngIf="isEditMode; else displayTarget" type="text" class="target-input" [(ngModel)]="player.gameData.target">
+</div>
+
+<ng-template #displayTarget>{{player.gameData.target}}</ng-template>

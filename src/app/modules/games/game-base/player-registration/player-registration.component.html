@@ -1,0 +1,18 @@
+<h5 class="text-center mt-3">Players Registration</h5>
+
+<div class="mt-4" [ngClass]="{'text-center': !players.length, 'text-right': players.length}">
+    <button class="btn btn-primary btn-sm" (click)="addPlayer()">+</button>
+</div>
+
+<div class="container">
+    <div class="row mt-2">
+        <div class="col p-0 text-center" *ngFor="let player of players">
+            <app-player-name [player]="player" (delete)="onDelete(player)"></app-player-name>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-5">
+  <button type="button" class="btn btn-info mr-2" (click)="onBack()">Back</button>
+  <button type="button" class="btn btn-success" [disabled]="!players.length" (click)="onStart()">Next</button>
+</div>

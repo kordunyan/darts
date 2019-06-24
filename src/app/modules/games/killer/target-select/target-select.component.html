@@ -1,9 +1,13 @@
-<h5 class="text-center mt-3">Set Target</h5>
+<div class="container">
+  <div class="mt-4" [ngClass]="{'text-center': !players.length, 'text-right': players.length}">
+    <button class="btn btn-primary btn-sm" (click)="addPlayer()">+</button>
+  </div>
+</div>
 
-<div class="container mt-5">
+<div class="container mt-2">
   <div class="row pl-3 pr-3">
     <div class="col p-0 text-center" *ngFor="let player of players">
-      <app-player-name [player]="player"></app-player-name>
+      <app-player-name [player]="player" (delete)="onDelete(player)"></app-player-name>
       <app-target isEditMode="true" [player]="player"></app-target>
     </div>
   </div>
@@ -11,5 +15,5 @@
 
 <div class="text-center mt-5">
     <button type="button" class="btn btn-info mr-2" (click)="onBack()">Back</button>
-    <button type="button" class="btn btn-success" [disabled]="!areTargetsValid()" (click)="onStart()">Start</button>
+    <button type="button" class="btn btn-success" [disabled]="!players.length || !areTargetsValid()" (click)="onStart()">Start</button>
 </div>

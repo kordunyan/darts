@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { KillerRoutingModule } from './killer-routing.module';
 import { GamePanelComponent } from './game-panel/game-panel.component';
-import { PlayerSelectComponent } from './player-select/player-select.component';
 import { BaseComponentsModule } from 'src/app/shared/components/base-components.module';
 import { GameBaseModule } from '../game-base/game-base.module';
 import { TargetSelectComponent } from './target-select/target-select.component';
@@ -16,7 +15,6 @@ import { HitsCounterComponent } from './hits-counter/hits-counter.component';
 @NgModule({
   declarations: [
     GamePanelComponent,
-    PlayerSelectComponent,
     TargetSelectComponent,
     TargetComponent,
     GameComponent,

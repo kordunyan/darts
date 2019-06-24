@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Player } from 'src/app/domain/player';
 import { DialogService } from 'src/app/service/dialog.service';
 import { PlayerService } from 'src/app/service/storage/player.service';
-import { start } from 'repl';
 
 @Component({
   selector: 'app-player-registration',

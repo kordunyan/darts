@@ -21,7 +21,11 @@ export class PlayerService extends AbstractStorageService {
   }
 
   getKillerPlayers(): Player[] {
-    return this.getObjectItem(KEY_VALUES.KILLER_PLAYERS);
+    const result = this.getObjectItem(KEY_VALUES.KILLER_PLAYERS);
+    if (result) {
+      return result;
+    }
+    return []; 
   }
 
   saveNewNames(names: string[]) {

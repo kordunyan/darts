@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import {filter} from 'rxjs/operators';
 import { PlayerNameDialogComponent } from '../modules/games/game-base/player-name-dialog/player-name-dialog.component';
-import { ConfirmDialogComponent } from '../shared/components/dialogs/confirm-dialog/confirm-dialog.component';
+ import { ConfirmDialogComponent } from '../shared/components/dialogs/confirm-dialog/confirm-dialog.component';
 
 
 
@@ -38,5 +38,14 @@ export class DialogService {
     })
     .beforeClose();
   }
+
+  // openAlertDialog(message: string): Observable<any> {
+  //   return this.dialog.open(AlertComponent, {
+  //     width: '300px',
+  //     data: {
+  //       message: message
+  //     }
+  //   });
+  // }
 
 }

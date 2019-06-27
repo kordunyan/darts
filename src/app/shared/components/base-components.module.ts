@@ -5,12 +5,14 @@ import { MaterialModule } from '../modules/material.module';
 import { RouterModule } from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.component';
+import { AlertComponent } from './dialogs/alert/alert.component';
 
 
 @NgModule({
   declarations: [
     NavComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    AlertComponent
   ],
   imports: [
     CommonModule,
@@ -23,10 +25,12 @@ import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.
     NavComponent,
     RouterModule,
     FormsModule,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    AlertComponent
   ],
   entryComponents: [
-    ConfirmDialogComponent  
+    ConfirmDialogComponent,
+    AlertComponent
   ]
 })
 export class BaseComponentsModule { }

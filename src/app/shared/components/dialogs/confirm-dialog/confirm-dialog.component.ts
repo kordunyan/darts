@@ -8,7 +8,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class ConfirmDialogComponent {
 
-  message = 'Are you sure to delete?';
+  message = '';
 
   constructor(
     public dialogRef: MatDialogRef<ConfirmDialogComponent>,

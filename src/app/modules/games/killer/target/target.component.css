@@ -5,3 +5,17 @@
     border-right: 1px solid #dee2e6;
 }
 
+.box {
+    border: 1px solid #000;
+    height: 24px;
+    width: 40px;
+    margin: 0 auto;
+}
+
+.green {
+    background: #08bb07;
+}
+
+.red {
+    background: #e30f04;
+}

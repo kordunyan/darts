@@ -1,21 +1,10 @@
-<div class="player-target p-2" *ngIf="isEditMode; else displayTarget" >
-    <input 
-        type="text" 
-        class="target-input"
-        required
-        id="targetInput"
-        name="targetInput"
-        #targetInput="ngModel"
-        [(ngModel)]="player.gameData.target"/>
-        <div *ngIf="targetInput.invalid && (targetInput.dirty || targetInput.touched)">
-            <div *ngIf="targetInput.errors.required">
-                Name is required.
-            </div>
-        </div>
+<div class="player-target p-2" *ngIf="player.gameData.target < 21; else displayTarget" >
+    {{player.gameData.target}}   
 </div>
 
 <ng-template #displayTarget>
     <div class="player-target p-2">
-        {{player.gameData.target}}
+        <div *ngIf="player.gameData.target == 22" class="box red"></div>
+        <div *ngIf="player.gameData.target == 21" class="box green"></div>
     </div>
 </ng-template>

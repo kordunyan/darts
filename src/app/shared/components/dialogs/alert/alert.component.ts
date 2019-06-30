@@ -13,7 +13,9 @@ export class AlertComponent {
   constructor(
     public dialogRef: MatDialogRef<AlertComponent>,
     @Inject(MAT_DIALOG_DATA) data
-  ) { }
+  ) { 
+    this.message = data.message;
+  }
 
   onOk() {
     this.dialogRef.close();

@@ -22,7 +22,7 @@ export class GameComponent implements OnInit {
 
   ngOnInit() {
     this.players = this.playerService.getKillerPlayers(); 
-    this.game = new KillerGame(5, this.players);
+    this.game = new KillerGame(this.players, 5);
   }
 
   reset() {
@@ -48,8 +48,7 @@ export class GameComponent implements OnInit {
   }
 
   onDelete(playerToRemove: Player) {
-    this.players = this.players.filter(player => player.name !== playerToRemove.name);
-    this.game.setPlayers(this.players);
+    this.game.deletePlayer(playerToRemove);
     this.playerService.saveKillerPlayers(this.players);
   }
 }

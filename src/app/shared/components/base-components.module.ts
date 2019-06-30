@@ -6,12 +6,16 @@ import { RouterModule } from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.component';
 import { AlertComponent } from './dialogs/alert/alert.component';
+import { TargetFieldValidator } from '../validators/target-field.validator';
+import { UniqueFieldValueValidator } from '../validators/unique-field-value.validator';
 
 
 @NgModule({
   declarations: [
     NavComponent,
     ConfirmDialogComponent,
+    TargetFieldValidator,
+    UniqueFieldValueValidator,
     AlertComponent
   ],
   imports: [
@@ -25,7 +29,10 @@ import { AlertComponent } from './dialogs/alert/alert.component';
     NavComponent,
     RouterModule,
     FormsModule,
+    ReactiveFormsModule,
     ConfirmDialogComponent,
+    TargetFieldValidator,
+    UniqueFieldValueValidator,
     AlertComponent
   ],
   entryComponents: [

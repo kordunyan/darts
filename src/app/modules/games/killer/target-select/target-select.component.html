@@ -1,19 +1,48 @@
 <div class="container">
-  <div class="mt-4" [ngClass]="{'text-center': !players.length, 'text-right': players.length}">
-    <button class="btn btn-primary btn-sm" (click)="addPlayer()">+</button>
+  <div class="mt-4" [ngClass]="{'text-center': !game.players.length, 'text-right': game.players.length}">
+    <button class="btn btn-primary btn-sm" (click)="onAddPlayer()">+</button>
   </div>
 </div>
 
-<div class="container mt-2">
-  <div class="row pl-3 pr-3">
-    <div class="col p-0 text-center" *ngFor="let player of players">
-      <app-player-name [player]="player" (delete)="onDelete(player)"></app-player-name>
-      <app-target isEditMode="true" [player]="player"></app-target>
+<form #targetsForm="ngForm">
+  <div class="container mt-2">
+    <div class="row pl-3 pr-3">
+        <div class="col p-0 text-center" *ngFor="let player of game.players; let i = index">
+          <app-player-name [player]="player" (delete)="onDelete(player)"></app-player-name>
+          <div class="player-target p-2">
+            <input 
+              type="text" 
+              class="target-input" 
+              required
+              appTargetFieldValidator
+              [uniqueFieldValue]="targetsForm"
+              id="targetInput{{i}}"
+              name="targetInput{{i}}"
+              autocomplete="off"
+              #input="ngModel"
+              [ngClass]="{'invalid': input.invalid && (input.dirty || input.touched) }"
+              [(ngModel)]="player.gameData.target"/>
+            <div *ngIf="input.invalid && (input.dirty || input.touched)">
+              <small *ngIf="input.errors.required" class="form-text form-text-invalid">
+                Field is required 
+              </small>
+              <small *ngIf="input.errors.invalidFormat" class="form-text form-text-invalid">
+                Invalid Format
+              </small>
+              <small *ngIf="input.errors.invalidRange" class="form-text form-text-invalid">
+                You can enter from 1 to 22
+              </small>
+              <small *ngIf="input.errors.nonUniqueValue" class="form-text form-text-invalid">
+                Value has already exists
+              </small>
+            </div>
+          </div>
+        </div>
     </div>
   </div>
-</div>
+</form>
 
 <div class="text-center mt-5">
     <button type="button" class="btn btn-info mr-2" (click)="onBack()">Back</button>
-    <button type="button" class="btn btn-success" [disabled]="!players.length || !areTargetsValid()" (click)="onStart()">Start</button>
+    <button type="button" class="btn btn-success" [disabled]="!game.players.length || !targetsForm.form.valid" (click)="onStart()">Start</button>
 </div>

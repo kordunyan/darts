@@ -1,65 +1,14 @@
 import { Player } from '../domain/player';
+import { AbstractGame } from './abstract.game';
+import { KillerGameData } from '../domain/killer.game-data';
 
-export class KillerGame {
-
-    currentPlayerIdx: number;
+export class KillerGame extends AbstractGame {
 
     constructor(
-        public maxHits: number,
-        public players: Player[]
+        players: Player[],
+        public maxHits: number
     ) {
-        this.changedPlayerScore();
-        this.setCurrentPlayer();
-    }
-
-    setPlayers(players: Player[]) {
-        this.players = players;
-        this.changedPlayerScore();
-        this.setCurrentPlayer();
-    }
-
-    setCurrentPlayer() {
-        this.currentPlayerIdx = this.players.findIndex(player => player.current);
-        if (this.currentPlayerIdx < 0) {
-            this.players[0].current = true;
-            this.currentPlayerIdx = 0;
-        }
-    }
-
-    nextPlayer() {
-        this.players[this.currentPlayerIdx].current = false;
-        this.nextIdx();
-        while (this.hasLost(this.currentPlayerIdx)) {
-            this.nextIdx();
-        }
-        this.players[this.currentPlayerIdx].current = true;
-    }
-
-    nextIdx() {
-        this.currentPlayerIdx++;
-        if (this.currentPlayerIdx >= this.players.length) {
-            this.currentPlayerIdx = 0;
-        }
-    }
-
-    previousIdx() {
-        this.currentPlayerIdx--;
-        if (this.currentPlayerIdx < 0) {
-            this.currentPlayerIdx = this.players.length - 1;
-        }
-    }
-
-    previousPlayer() {
-        this.players[this.currentPlayerIdx].current = false;
-        this.previousIdx();
-        while(this.hasLost(this.currentPlayerIdx)) {
-            this.previousIdx();
-        }
-        this.players[this.currentPlayerIdx].current = true;
-    }
-
-    hasLost(idx): boolean {
-        return this.players[idx].lost;
+        super(players);
     }
 
     changedPlayerScore() {
@@ -68,4 +17,7 @@ export class KillerGame {
         });
     }
 
+    buildNewGameData() {
+        return new KillerGameData();
+    }
 }

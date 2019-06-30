@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { PlayerService } from 'src/app/service/storage/player.service';
 import { Player } from 'src/app/domain/player';
 import { Router } from '@angular/router';
-import { KillerGameData } from 'src/app/domain/killer.game-data';
 import { DialogService } from 'src/app/service/dialog.service';
+import { KillerGame } from 'src/app/game-manger/killer.game';
+import { FormBuilder, FormArray } from '@angular/forms';
+
 
 const TARGET_REGEX = /^[\d]*$/;
 
@@ -14,23 +16,28 @@ const TARGET_REGEX = /^[\d]*$/;
 })
 export class TargetSelectComponent implements OnInit {
 
-  players: Player[] = [];
+  targetForm = this.formBuilder.group({
+    targets: this.formBuilder.array([])
+  });
+
+  game: KillerGame;
 
   constructor(
     private playerService: PlayerService,
     private dialogService: DialogService,
+    private formBuilder: FormBuilder,
     private router: Router
   ) { }
 
   ngOnInit() {
-    const players = this.playerService.getKillerPlayers(); 
-    players.forEach(player => this.initPlayer(player));
-    this.players = players;
+    const players = this.playerService.getKillerPlayers();
+    this.game = new KillerGame(players, 5);
+    this.game.initPlayers();
   }
 
   areTargetsValid() {
     var result = true;
-    this.players.forEach(player => {
+    this.game.players.forEach(player => {
       if (!TARGET_REGEX.test(player.gameData.target)) {
         result = false;
       }
@@ -38,36 +45,31 @@ export class TargetSelectComponent implements OnInit {
     return result;
   }
 
-  addPlayer() {
+  onAddPlayer() {
     this.dialogService.openPlayerNameDialog(this.getFileterdStoredNames())
       .subscribe((name: string) => {
-        this.players.push(this.initPlayer(new Player(name)));  
+        this.addUniquePlayer(name);
       });
   }
 
-  initPlayer(player: Player): Player {
-    player.lost = false;
-    player.current = false;
-    player.gameData = new KillerGameData();
-    return player;
+  addUniquePlayer(playerName) {
+    if (!this.game.addUniquePlayer(new Player(name))) {
+      this.dialogService.openAlertDialog(`Player '${playerName}' has already exists`, '350px');
+    }
   }
 
   getFileterdStoredNames(): string[] {
     const storedNames = this.playerService.getAllNames();
-    const selectedNames = this.getPlayerNames();
+    const selectedNames = this.game.getPlayerNames();
     return storedNames.filter(storedName => {
       const sotredInLower = storedName.toLowerCase();
       return selectedNames.findIndex(selectedName => selectedName.toLowerCase() === sotredInLower) < 0;
     });
   }
 
-  getPlayerNames(): string[] {
-    return this.players.map(player => player.name);
-  }
-
   onStart() {
-    this.playerService.saveNewNames(this.getPlayerNames());
-    this.playerService.saveKillerPlayers(this.players);
+    this.playerService.saveNewNames(this.game.getPlayerNames());
+    this.playerService.saveKillerPlayers(this.game.players);
     this.router.navigate(['killer/game']);
   }
 
@@ -76,7 +78,7 @@ export class TargetSelectComponent implements OnInit {
   }
 
   onDelete(playerToRemove: Player) {
-    this.players = this.players.filter(player => player.name !== playerToRemove.name);
+    this.game.deletePlayer(playerToRemove);
   }
 
 }

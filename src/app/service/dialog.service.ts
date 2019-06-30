@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import {filter} from 'rxjs/operators';
 import { PlayerNameDialogComponent } from '../modules/games/game-base/player-name-dialog/player-name-dialog.component';
  import { ConfirmDialogComponent } from '../shared/components/dialogs/confirm-dialog/confirm-dialog.component';
+import { AlertComponent } from '../shared/components/dialogs/alert/alert.component';
 
 
 
@@ -29,9 +30,9 @@ export class DialogService {
     );
   }
 
-  openConfirmDialog(message: string): Observable<any> {
+  openConfirmDialog(message: string, width: string = '300px'): Observable<any> {
     return this.dialog.open(ConfirmDialogComponent, {
-      width: '300px',
+      width: width,
       data: {
         message: message
       }
@@ -39,13 +40,13 @@ export class DialogService {
     .beforeClose();
   }
 
-  // openAlertDialog(message: string): Observable<any> {
-  //   return this.dialog.open(AlertComponent, {
-  //     width: '300px',
-  //     data: {
-  //       message: message
-  //     }
-  //   });
-  // }
+  openAlertDialog(message: string, width: string = '300px'): Observable<any> {
+    return this.dialog.open(AlertComponent, {
+      width: width,
+      data: {
+        message: message
+      }
+    }).beforeClose();
+  }
 
 }

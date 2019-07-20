@@ -18,6 +18,9 @@ export class AbstractGame {
     }
 
     setCurrentPlayer() {
+        if (ArrayUtils.isEmpty(this.players)) {
+            return;
+        }
         this.currentPlayerIdx = this.players.findIndex(player => player.current);
         if (this.currentPlayerIdx < 0) {
             this.players[0].current = true;

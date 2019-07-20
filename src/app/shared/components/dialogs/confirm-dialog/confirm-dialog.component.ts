@@ -13,7 +13,9 @@ export class ConfirmDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<ConfirmDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data
-  ) { }
+  ) {
+    this.message = data.message;
+   }
 
   onCancel() {
     this.dialogRef.close();  

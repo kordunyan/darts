@@ -1,5 +1,6 @@
 <div [ngClass]="{'bg-primary': player.current && playMode, 'bg-danger': player.lost && playMode }" class="player-name p-2">
   {{ player.name }}
+  <span *ngIf="player.overSet > 0" class="badge badge-light">{{ player.overSet }}</span>
   <div class="btn-remove" (click)="onDeleteClicked()">
     <i class="fa fa-times" aria-hidden="true"></i>
   </div>  

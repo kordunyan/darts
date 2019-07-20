@@ -9,7 +9,6 @@ import { FormGroup } from '@angular/forms';
 })
 export class TargetComponent {
 
-  @Input() isEditMode = false;
   @Input() player: Player;
 
   constructor() { }

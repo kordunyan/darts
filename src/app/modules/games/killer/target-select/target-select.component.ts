@@ -4,7 +4,7 @@ import { Player } from 'src/app/domain/player';
 import { Router } from '@angular/router';
 import { DialogService } from 'src/app/service/dialog.service';
 import { KillerGame } from 'src/app/game-manger/killer.game';
-import { FormBuilder, FormArray } from '@angular/forms';
+import { FormBuilder, FormArray, NgForm, FormControl, AbstractControl } from '@angular/forms';
 
 
 const TARGET_REGEX = /^[\d]*$/;
@@ -53,7 +53,7 @@ export class TargetSelectComponent implements OnInit {
   }
 
   addUniquePlayer(playerName) {
-    if (!this.game.addUniquePlayer(new Player(name))) {
+    if (!this.game.addUniquePlayer(new Player(playerName))) {
       this.dialogService.openAlertDialog(`Player '${playerName}' has already exists`, '350px');
     }
   }
@@ -81,4 +81,12 @@ export class TargetSelectComponent implements OnInit {
     this.game.deletePlayer(playerToRemove);
   }
 
+  isInvalidTarget(ngForm: NgForm, targetIdx: number) {
+    const input = this.getInput(ngForm, targetIdx);
+    return input && input.invalid && (input.dirty || input.touched);
+  }
+
+  getInput(ngForm: NgForm, targetIdx: number): AbstractControl {
+    return ngForm.form.controls['targetInput' + targetIdx];
+  }
 }

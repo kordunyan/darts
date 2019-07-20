@@ -4,7 +4,7 @@
   </div>
 </div>
 
-<form #targetsForm="ngForm">
+<form #targets="ngForm">
   <div class="container mt-2">
     <div class="row pl-3 pr-3">
         <div class="col p-0 text-center" *ngFor="let player of game.players; let i = index">
@@ -15,27 +15,27 @@
               class="target-input" 
               required
               appTargetFieldValidator
-              [uniqueFieldValue]="targetsForm"
+              [uniqueFieldValue]="targets"
               id="targetInput{{i}}"
               name="targetInput{{i}}"
               autocomplete="off"
               #input="ngModel"
               [ngClass]="{'invalid': input.invalid && (input.dirty || input.touched) }"
               [(ngModel)]="player.gameData.target"/>
-            <div *ngIf="input.invalid && (input.dirty || input.touched)">
-              <small *ngIf="input.errors.required" class="form-text form-text-invalid">
-                Field is required 
-              </small>
-              <small *ngIf="input.errors.invalidFormat" class="form-text form-text-invalid">
-                Invalid Format
-              </small>
-              <small *ngIf="input.errors.invalidRange" class="form-text form-text-invalid">
-                You can enter from 1 to 22
-              </small>
-              <small *ngIf="input.errors.nonUniqueValue" class="form-text form-text-invalid">
-                Value has already exists
-              </small>
-            </div>
+              <div *ngIf="isInvalidTarget(targets, i)">
+                <small *ngIf="getInput(targets, i).errors.required" class="form-text form-text-invalid">
+                  Field is required 
+                </small>
+                <small *ngIf="getInput(targets, i).errors.invalidFormat" class="form-text form-text-invalid">
+                  Invalid Format
+                </small>
+                <small *ngIf="getInput(targets, i).errors.invalidRange" class="form-text form-text-invalid">
+                  You can enter from 1 to 22
+                </small>
+                <small *ngIf="getInput(targets, i).errors.nonUniqueValue" class="form-text form-text-invalid">
+                  Value has already exists
+                </small>
+              </div>
           </div>
         </div>
     </div>
@@ -44,5 +44,5 @@
 
 <div class="text-center mt-5">
     <button type="button" class="btn btn-info mr-2" (click)="onBack()">Back</button>
-    <button type="button" class="btn btn-success" [disabled]="!game.players.length || !targetsForm.form.valid" (click)="onStart()">Start</button>
+    <button type="button" class="btn btn-success" [disabled]="!game.players.length || !targets.form.valid" (click)="onStart()">Start</button>
 </div>

@@ -18,7 +18,7 @@ export class PlayerNameComponent {
   ) { }
 
   onDeleteClicked() {
-    this.dialogService.openConfirmDialog('Are you sure to delete the player?')
+    this.dialogService.openConfirmDialog('Are you sure to delete player?')
       .subscribe(result => {
         if (result) {
           this.delete.emit();

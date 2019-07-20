@@ -6,16 +6,18 @@
 }
 
 .box {
-    border: 1px solid #000;
     height: 24px;
     width: 40px;
     margin: 0 auto;
+    border-radius: 3px;
 }
 
 .green {
     background: #08bb07;
+    box-shadow: 0 0 0 2px rgba(72,180,97,.5);
 }
 
 .red {
     background: #e30f04;
+    box-shadow: 0 0 0 2px rgba(225,83,97,.5);
 }

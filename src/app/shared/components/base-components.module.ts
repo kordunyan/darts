@@ -8,6 +8,7 @@ import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.
 import { AlertComponent } from './dialogs/alert/alert.component';
 import { TargetFieldValidator } from '../validators/target-field.validator';
 import { UniqueFieldValueValidator } from '../validators/unique-field-value.validator';
+import { CongratulationDialogComponent } from './dialogs/congratulation-dialog/congratulation-dialog.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { UniqueFieldValueValidator } from '../validators/unique-field-value.vali
     ConfirmDialogComponent,
     TargetFieldValidator,
     UniqueFieldValueValidator,
-    AlertComponent
+    AlertComponent,
+    CongratulationDialogComponent
   ],
   imports: [
     CommonModule,
@@ -33,11 +35,13 @@ import { UniqueFieldValueValidator } from '../validators/unique-field-value.vali
     ConfirmDialogComponent,
     TargetFieldValidator,
     UniqueFieldValueValidator,
-    AlertComponent
+    AlertComponent,
+    CongratulationDialogComponent
   ],
   entryComponents: [
     ConfirmDialogComponent,
-    AlertComponent
+    AlertComponent,
+    CongratulationDialogComponent
   ]
 })
 export class BaseComponentsModule { }

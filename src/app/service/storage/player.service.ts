@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AbstractStorageService } from './abstract-storage.service';
 import { Player } from 'src/app/domain/player';
+import { max } from 'rxjs/operators';
 
 const KEY_VALUES = {
   NAMES: 'NAMES',
-  KILLER_PLAYERS: 'KILLER_PLAYERS'
+  KILLER_PLAYERS: 'KILLER_PLAYERS',
+  MAX_HITS: 'MAX_HITS'
 };
 
 @Injectable({
@@ -26,6 +28,14 @@ export class PlayerService extends AbstractStorageService {
       return result;
     }
     return []; 
+  }
+
+  getMaxHits(): number {
+    return this.getItem(KEY_VALUES.MAX_HITS);
+  }
+
+  saveMaxHits(maxHits: number) {
+    this.updateItem(KEY_VALUES.MAX_HITS, maxHits);
   }
 
   saveNewNames(names: string[]) {

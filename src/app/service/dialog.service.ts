@@ -5,6 +5,8 @@ import {filter} from 'rxjs/operators';
 import { PlayerNameDialogComponent } from '../modules/games/game-base/player-name-dialog/player-name-dialog.component';
  import { ConfirmDialogComponent } from '../shared/components/dialogs/confirm-dialog/confirm-dialog.component';
 import { AlertComponent } from '../shared/components/dialogs/alert/alert.component';
+import { Player } from '../domain/player';
+import { CongratulationDialogComponent } from '../shared/components/dialogs/congratulation-dialog/congratulation-dialog.component';
 
 
 
@@ -47,6 +49,15 @@ export class DialogService {
         message: message
       }
     }).beforeClose();
+  }
+
+  openCongratulationDialog(player: Player) {
+    return this.dialog.open(CongratulationDialogComponent, {
+      width: '450px',
+      data: {
+        player: player
+      }
+    });
   }
 
 }

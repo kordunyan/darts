@@ -1,15 +1,20 @@
 import { Player } from '../domain/player';
 import { ArrayUtils } from '../shared/utils/array.utils';
+import { Subject } from 'rxjs';
 
 export class AbstractGame {
 
     currentPlayerIdx: number;
+    winEvent = new Subject<Player>();
 
     constructor(
         public players: Player[]
     ) {
-        this.changedPlayerScore();
         this.setCurrentPlayer();
+    }
+
+    onWin() {
+        return this.winEvent;
     }
 
     setCurrentPlayer() {
@@ -24,8 +29,20 @@ export class AbstractGame {
         return this.players[idx].lost;
     }
 
-    nextPlayer() {
-        this.players[this.currentPlayerIdx].current = false;
+    skip() {
+        this.players[this.currentPlayerIdx].overSet++;
+        this.nextPlayer(true);
+    }
+
+    nextPlayer(skip = false) {
+        const currentPlayer = this.players[this.currentPlayerIdx]; 
+        if (!skip && !currentPlayer.lost) {
+            if (currentPlayer.overSet > 0) {
+                currentPlayer.overSet--;
+                return;
+            }
+        }
+        currentPlayer.current = false;
         this.nextIdx();
         while (this.hasLost(this.currentPlayerIdx)) {
             this.nextIdx();
@@ -75,6 +92,7 @@ export class AbstractGame {
     initPlayer(player: Player): Player {
         player.lost = false;
         player.current = false;
+        player.overSet = 0;
         player.gameData = this.buildNewGameData();
         return player;
     }
@@ -102,5 +120,16 @@ export class AbstractGame {
 
     deletePlayer(playerToRemove: Player) {
         this.players = this.players.filter(player => player.name !== playerToRemove.name);    
+    }
+
+    checkForWinner() {
+        const winner = this.getWinner();
+        if (winner) {
+            this.winEvent.next(winner);
+        }
+    }
+
+    getWinner(): Player {
+        return null;
     }
 }

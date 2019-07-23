@@ -4,8 +4,10 @@ import { Player } from 'src/app/domain/player';
 import { KillerGame } from 'src/app/game-manger/killer.game';
 import { Router } from '@angular/router';
 import { DialogService } from 'src/app/service/dialog.service';
+import { AppProperties } from 'src/app/domain/app.properties';
+import { GroupSplitter } from 'src/app/game-manger/group.splitter';
 
-const DEFAULT_MAX_HITS = 5;
+
 
 @Component({
   selector: 'app-game',
@@ -20,11 +22,13 @@ export class GameComponent implements OnInit {
   constructor(
     private playerService: PlayerService,
     private dialogService: DialogService,
+    private groupSplitter: GroupSplitter,
     private router: Router
   ) { }
 
   ngOnInit() {
     this.players = this.playerService.getKillerPlayers(); 
+    this.groupSplitter.splitInGroups(this.players);
     this.game = new KillerGame(this.players, this.getMaxHits());
     this.playerService.saveMaxHits(this.game.maxHits);
     this.game.onWin().subscribe(winner => {
@@ -37,7 +41,7 @@ export class GameComponent implements OnInit {
   getMaxHits() {
     const storedMaxHits = this.playerService.getMaxHits();
     if (storedMaxHits == null) {
-      return DEFAULT_MAX_HITS;
+      return AppProperties.MAX_HITS;
     }
     return storedMaxHits;
   }
@@ -73,6 +77,7 @@ export class GameComponent implements OnInit {
   onDelete(playerToRemove: Player) {
     this.game.deletePlayer(playerToRemove);
     this.playerService.saveKillerPlayers(this.players);
+    this.groupSplitter.splitInGroups(this.game.players);
     this.game.checkForWinner();
   }
 }

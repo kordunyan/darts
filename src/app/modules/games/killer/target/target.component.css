@@ -3,6 +3,7 @@
     background-color: #e9ecef;
     border-bottom: 1px solid #dee2e6;
     border-right: 1px solid #dee2e6;
+    position: relative;
 }
 
 .box {
@@ -21,3 +22,37 @@
     background: #e30f04;
     box-shadow: 0 0 0 2px rgba(225,83,97,.5);
 }
+
+.group {
+    width: 15px;
+    height: 14px;
+    display: inline-block;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+}
+
+.group0 {
+    background: #F7941C;    
+}
+
+.group1 {
+    background: #ED1264;
+}
+
+.group2 {
+    background: #5B2D90;
+}
+
+.group3 {
+    background: #0271B8;   
+}
+
+.group4 {
+    background: #00A753;   
+}
+
+.group5 {
+    background: #BCAD09;   
+}
+

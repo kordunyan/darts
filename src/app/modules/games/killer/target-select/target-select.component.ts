@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { DialogService } from 'src/app/service/dialog.service';
 import { KillerGame } from 'src/app/game-manger/killer.game';
 import { FormBuilder, FormArray, NgForm, FormControl, AbstractControl } from '@angular/forms';
+import { AppProperties } from 'src/app/domain/app.properties';
 
 
 const TARGET_REGEX = /^[\d]*$/;
@@ -31,7 +32,7 @@ export class TargetSelectComponent implements OnInit {
 
   ngOnInit() {
     const players = this.playerService.getKillerPlayers();
-    this.game = new KillerGame(players, 5);
+    this.game = new KillerGame(players, AppProperties.MAX_HITS);
     this.game.initPlayers();
   }
 

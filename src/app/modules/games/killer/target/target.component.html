@@ -1,5 +1,6 @@
 <div class="player-target p-2" *ngIf="player.gameData.target < 21; else displayTarget" >
-    {{player.gameData.target}}   
+    {{player.gameData.target}} 
+    <span  class="badge group group{{player.gameData.groupId}}"></span>
 </div>
 
 <ng-template #displayTarget>

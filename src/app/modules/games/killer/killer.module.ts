@@ -10,6 +10,9 @@ import { TargetComponent } from './target/target.component';
 import { MaterialModule } from 'src/app/shared/modules/material.module';
 import { GameComponent } from './game/game.component';
 import { HitsCounterComponent } from './hits-counter/hits-counter.component';
+import { FormatComponent } from './format/format.component';
+import { ReactivaComponent } from './reactiva/reactiva.component';
+import { TargetSelectionComponent } from './target-selection/target-selection.component';
 
 
 @NgModule({
@@ -18,7 +21,10 @@ import { HitsCounterComponent } from './hits-counter/hits-counter.component';
     TargetSelectComponent,
     TargetComponent,
     GameComponent,
-    HitsCounterComponent
+    HitsCounterComponent,
+    FormatComponent,
+    ReactivaComponent,
+    TargetSelectionComponent
   ],
   imports: [
     CommonModule,

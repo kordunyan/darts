@@ -17,10 +17,6 @@ const TARGET_REGEX = /^[\d]*$/;
 })
 export class TargetSelectComponent implements OnInit {
 
-  targetForm = this.formBuilder.group({
-    targets: this.formBuilder.array([])
-  });
-
   game: KillerGame;
 
   constructor(
@@ -34,6 +30,11 @@ export class TargetSelectComponent implements OnInit {
     const players = this.playerService.getKillerPlayers();
     this.game = new KillerGame(players, AppProperties.MAX_HITS);
     this.game.initPlayers();
+  }
+
+  logForm(targetForm, players) {
+    console.log(targetForm);
+    console.log(players);
   }
 
   areTargetsValid() {

@@ -28,6 +28,10 @@ export class AbstractGame {
         }
     }
 
+    getCurrentPlayer() {
+        return this.players[this.currentPlayerIdx];
+    }
+
     hasLost(idx): boolean {
         return this.players[idx].lost;
     }

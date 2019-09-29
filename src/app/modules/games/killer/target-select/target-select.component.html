@@ -4,7 +4,7 @@
   </div>
 </div>
 
-<form #targets="ngForm">
+<!-- <form #targets="ngForm">
   <div class="container mt-2">
     <div class="row pl-3 pr-3">
         <div class="col p-0 text-center" *ngFor="let player of game.players; let i = index">
@@ -40,9 +40,10 @@
         </div>
     </div>
   </div>
-</form>
+</form> -->
 
 <div class="text-center mt-5">
+    <button class="button mr-3" (click)="logForm(targets, game.players)">Test</button>
     <button type="button" class="btn btn-info mr-2" (click)="onBack()">Back</button>
     <button type="button" class="btn btn-success" [disabled]="!game.players.length || !targets.form.valid" (click)="onStart()">Start</button>
 </div>

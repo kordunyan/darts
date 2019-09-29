@@ -4,17 +4,39 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container mt-2">
   <form [formGroup]="targetForm">
-    <div formArrayName="targets" *ngFor="let target of targets.controls; let i = index">
-      <input [class.is-invalid]="getControl(i).invalid" type="text" class="form-control my-3" [formControlName]="i">
-    </div>
+    <div class="row pl-3 pr-3">
+      <div class="col p-0 text-center" formArrayName="targets" *ngFor="let target of targets.controls; let i = index">
+        <app-player-name [player]="getPlayer(i)" (delete)="onDelete(i)"></app-player-name>  
+        <div class="player-target p-2">
+              <input 
+                type="text" 
+                class="target-input" 
+                autocomplete="off"
+                [class.invalid]="getControl(i).invalid && (getControl(i).dirty || getControl(i).touched)"
+                [formControlName]="i">
+              <div *ngIf="getControl(i).errors && (getControl(i).dirty || getControl(i).touched)">
+                <small *ngIf="getControl(i).errors?.required" class="form-text form-text-invalid">
+                  Field is required 
+                </small>
+                <small *ngIf="getControl(i).errors?.invalidFormat" class="form-text form-text-invalid">
+                  Invalid Format
+                </small>
+                <small *ngIf="getControl(i).errors?.invalidRange" class="form-text form-text-invalid">
+                  You can enter from 1 to 22
+                </small>
+                <small *ngIf="getControl(i).errors?.nonUniqueValue" class="form-text form-text-invalid">
+                  Value has already exists
+                </small>
+              </div>
+          </div>
+        </div>
+      </div>
   </form>
-
-  {{targetForm.valid}}
-
 </div>
 
-<div class="container">
-  <button class="btn btn-primary" (click)="checkStatus()">Check</button>
+<div class="text-center mt-5">
+    <button type="button" class="btn btn-info mr-2" (click)="onBack()">Back</button>
+    <button type="button" class="btn btn-success" [disabled]="!game.players.length || !targetForm.valid" (click)="onStart()">Start</button>
 </div>

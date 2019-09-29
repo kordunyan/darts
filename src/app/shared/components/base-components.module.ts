@@ -6,8 +6,6 @@ import { RouterModule } from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.component';
 import { AlertComponent } from './dialogs/alert/alert.component';
-import { TargetFieldValidator } from '../validators/target-field.validator';
-import { UniqueFieldValueValidator } from '../validators/unique-field-value.validator';
 import { CongratulationDialogComponent } from './dialogs/congratulation-dialog/congratulation-dialog.component';
 
 
@@ -15,8 +13,6 @@ import { CongratulationDialogComponent } from './dialogs/congratulation-dialog/c
   declarations: [
     NavComponent,
     ConfirmDialogComponent,
-    TargetFieldValidator,
-    UniqueFieldValueValidator,
     AlertComponent,
     CongratulationDialogComponent
   ],
@@ -33,8 +29,6 @@ import { CongratulationDialogComponent } from './dialogs/congratulation-dialog/c
     FormsModule,
     ReactiveFormsModule,
     ConfirmDialogComponent,
-    TargetFieldValidator,
-    UniqueFieldValueValidator,
     AlertComponent,
     CongratulationDialogComponent
   ],
